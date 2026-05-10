@@ -28,6 +28,8 @@ public class PerfilFragment extends Fragment {
     private PerfilViewModel vm;
     private FragmentPerfilBinding binding;
 
+    private Propietario propietarioActual=null;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -42,15 +44,50 @@ public class PerfilFragment extends Fragment {
                 binding.etDni.setText(propietario.getDni());
                 binding.etNombre.setText(propietario.getNombre());
                 binding.etApellido.setText(propietario.getApellido());
-                binding.etDireccion.setText(propietario.getDireccion());
+                binding.etEmail.setText(propietario.getEmail());
                 binding.etTelefono.setText(propietario.getTelefono());
+
+                propietarioActual=propietario;
             }
         });
 
         vm.cargarPerfil();
 
+
+        binding.btEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                binding.etNombre.setEnabled(true);
+                binding.etApellido.setEnabled(true);
+                binding.etDni.setEnabled(true);
+                binding.etEmail.setEnabled(true);
+                binding.etTelefono.setEnabled(true);
+                binding.btEditar.setVisibility(View.GONE);
+                binding.btAceptar.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        binding.btAceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Propietario prop= new Propietario(propietarioActual.getId(),binding.etNombre.getText().toString(),binding.etApellido.getText().toString(),binding.etDni.getText().toString(),binding.etTelefono.getText().toString(),propietarioActual.getEmail(), propietarioActual.getClave());
+                vm.editarPerfil(prop);
+                binding.etNombre.setEnabled(false);
+                binding.etApellido.setEnabled(false);
+                binding.etDni.setEnabled(false);
+                binding.etEmail.setEnabled(false);
+                binding.etTelefono.setEnabled(false);
+                binding.btEditar.setVisibility(View.VISIBLE);
+                binding.btAceptar.setVisibility(View.INVISIBLE);
+            }
+        });
         return root;
     }
+
 
     @Override
     public void onDestroyView() {

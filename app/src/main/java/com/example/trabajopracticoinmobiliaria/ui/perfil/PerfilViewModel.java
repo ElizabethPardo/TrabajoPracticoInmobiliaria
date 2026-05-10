@@ -75,4 +75,10 @@ public class PerfilViewModel extends AndroidViewModel {
 
 
     }
+
+    public void editarPerfil(Propietario prop)
+    {
+
+
+    }
 }

@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_perfil,
-                R.id.nav_slideshow,
+                R.id.nav_inmueble,
                 R.id.nav_salir
         )
                 .setOpenableLayout(binding.drawerLayout)

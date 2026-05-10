@@ -25,7 +25,7 @@ across the layout configurations
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="#85B7E8"
+            android:background="#2e2e2e"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/nav_header_main"
             app:menu="@menu/navigation_drawer"/>

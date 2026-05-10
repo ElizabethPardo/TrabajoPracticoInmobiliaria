@@ -40,9 +40,9 @@ public class SalirFragment extends Fragment {
 
     public  void dialogSalir(View v)
     {
-        new AlertDialog.Builder(getContext())
+        AlertDialog dialog = new AlertDialog.Builder(getContext())
                 .setTitle("Salir")
-                .setMessage("Esta seguro que desea cerrar sesión?")
+                .setMessage("¿Está seguro que desea cerrar sesión?")
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -52,12 +52,22 @@ public class SalirFragment extends Fragment {
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Navigation.findNavController(getActivity(),R.id.nav_host_fragment_content_main).navigate(R.id.nav_perfil);
+                        Navigation.findNavController(getActivity(),
+                                        R.id.nav_host_fragment_content_main)
+                                .navigate(R.id.nav_perfil);
                     }
                 })
-                .show();
+                .create();
 
+        dialog.show();
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                .setTextColor(getResources().getColor(android.R.color.darker_gray));
+
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+                .setTextColor(getResources().getColor(android.R.color.darker_gray));
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

@@ -8,7 +8,6 @@ public class Propietario implements Serializable {
     private  String nombre;
     private String apellido;
     private String dni;
-    private String direccion;
     private String telefono;
     private String email;
     private String clave;
@@ -18,34 +17,31 @@ public class Propietario implements Serializable {
     public Propietario() {
     }
 
-    public Propietario(int id, String nombre, String apellido, String dni, String direccion, String telefono, String email, String clave, String avatar) {
+    public Propietario(int id, String nombre, String apellido, String dni, String telefono, String email, String clave, String avatar) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
-        this.direccion = direccion;
         this.telefono = telefono;
         this.email = email;
         this.clave = clave;
         this.avatar = avatar;
     }
 
-    public Propietario(int id, String nombre, String apellido, String dni, String direccion, String telefono, String email, String clave) {
+    public Propietario(int id, String nombre, String apellido, String dni,String telefono, String email, String clave) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
-        this.direccion = direccion;
         this.telefono = telefono;
         this.email = email;
         this.clave = clave;
     }
 
-    public Propietario(String nombre, String apellido, String dni, String direccion, String telefono, String email, String clave) {
+    public Propietario(String nombre, String apellido, String dni,String telefono, String email, String clave) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
-        this.direccion = direccion;
         this.telefono = telefono;
         this.email = email;
         this.clave = clave;
@@ -67,12 +63,11 @@ public class Propietario implements Serializable {
         this.avatar = avatar;
     }
 
-    public Propietario(int id, String nombre, String apellido, String dni, String direccion, String telefono) {
+    public Propietario(int id, String nombre, String apellido, String dni, String telefono) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
-        this.direccion = direccion;
         this.telefono = telefono;
     }
 
@@ -108,13 +103,6 @@ public class Propietario implements Serializable {
         this.dni = dni;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
 
     public String getTelefono() {
         return telefono;
