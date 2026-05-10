@@ -1,147 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="24dp"
     android:background="#2e2e2e"
     tools:context=".ui.perfil.PerfilFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/tvDni"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="24dp">
+        android:text="DNI"
+        android:textColor="#D6D6D6"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/etDni"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:background="#2e2e2e"
-            android:enabled="false"
-            android:hint="DNI"
-            android:inputType="number"
-            android:padding="16dp"
-            android:textColor="#fff5e7"
-            android:textColorHint="#808080"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/etDni"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="#FFFFFF"
+        android:enabled="false"
+        android:inputType="number"
+        android:padding="14dp"
+        android:textColor="#343A40"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDni" />
 
-        <EditText
-            android:id="@+id/etApellido"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="16dp"
-            android:background="#2e2e2e"
-            android:enabled="false"
-            android:hint="Apellido"
-            android:inputType="textPersonName"
-            android:padding="16dp"
-            android:textColor="#fff5e7"
-            android:textColorHint="#808080"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etDni" />
 
-        <EditText
-            android:id="@+id/etNombre"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="16dp"
-            android:background="#2e2e2e"
-            android:enabled="false"
-            android:hint="Nombre"
-            android:inputType="textPersonName"
-            android:padding="16dp"
-            android:textColor="#fff5e7"
-            android:textColorHint="#808080"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etApellido" />
+    <TextView
+        android:id="@+id/tvApellido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Apellido"
+        android:textColor="#D6D6D6"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etDni" />
 
-        <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="16dp"
-            android:background="#2e2e2e"
-            android:enabled="false"
-            android:hint="Email"
-            android:inputType="text"
-            android:padding="16dp"
-            android:textColor="#fff5e7"
-            android:textColorHint="#808080"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etNombre" />
+    <EditText
+        android:id="@+id/etApellido"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="#FFFFFF"
+        android:enabled="false"
+        android:inputType="textPersonName"
+        android:padding="14dp"
+        android:textColor="#343A40"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvApellido" />
 
-        <EditText
-            android:id="@+id/etTelefono"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="16dp"
-            android:background="#2e2e2e"
-            android:enabled="false"
-            android:hint="Teléfono"
-            android:inputType="phone"
-            android:padding="16dp"
-            android:textColor="#fff5e7"
-            android:textColorHint="#808080"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etEmail" />
 
-        <Button
-            android:id="@+id/btEditar"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/button_rounded"
-            android:text="Editar"
-            android:textAllCaps="false"
-            android:textColor="#2e2e2e"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etTelefono" />
+    <TextView
+        android:id="@+id/tvNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Nombre"
+        android:textColor="#D6D6D6"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etApellido" />
 
-        <Button
-            android:id="@+id/btAceptar"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/button_rounded"
-            android:text="Aceptar"
-            android:textAllCaps="false"
-            android:textColor="#2e2e2e"
-            android:textSize="18sp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btEditar" />
+    <EditText
+        android:id="@+id/etNombre"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="#FFFFFF"
+        android:enabled="false"
+        android:inputType="textPersonName"
+        android:padding="14dp"
+        android:textColor="#343A40"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNombre" />
 
-        <Button
-            android:id="@+id/btCambiarPass"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/button_rounded"
-            android:text="Cambiar contraseña"
-            android:textAllCaps="false"
-            android:textColor="#2e2e2e"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btAceptar" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Email"
+        android:textColor="#D6D6D6"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etNombre" />
 
-</ScrollView>
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="#FFFFFF"
+        android:enabled="false"
+        android:inputType="text"
+        android:padding="14dp"
+        android:textColor="#343A40"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvEmail" />
+
+
+    <TextView
+        android:id="@+id/tvTelefono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Teléfono"
+        android:textColor="#D6D6D6"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etEmail" />
+
+
+    <EditText
+        android:id="@+id/etTelefono"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:background="#FFFFFF"
+        android:enabled="false"
+        android:inputType="phone"
+        android:padding="14dp"
+        android:textColor="#343A40"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTelefono" />
+
+    <Button
+        android:id="@+id/btEditar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/button_rounded"
+        android:text="Editar"
+        android:textAllCaps="false"
+        android:textColor="#2e2e2e"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etTelefono" />
+
+    <Button
+        android:id="@+id/btAceptar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_rounded"
+        android:text="Aceptar"
+        android:textAllCaps="false"
+        android:textColor="#2e2e2e"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btEditar" />
+
+
+    <Button
+        android:id="@+id/btCambiarPass"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/button_rounded"
+        android:text="Cambiar contraseña"
+        android:textAllCaps="false"
+        android:textColor="#2e2e2e"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btAceptar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

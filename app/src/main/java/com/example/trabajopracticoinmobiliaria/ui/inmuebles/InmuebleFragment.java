@@ -16,17 +16,17 @@ import com.example.trabajopracticoinmobiliaria.databinding.FragmentInmuebleBindi
 public class InmuebleFragment extends Fragment {
 
     private FragmentInmuebleBinding binding;
+    private InmuebleViewModel vm;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        InmuebleViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(InmuebleViewModel.class);
+
+                vm= new ViewModelProvider(this).get(InmuebleViewModel.class);
 
         binding = FragmentInmuebleBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
         return root;
     }
 

@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -40,20 +41,25 @@ public class MainActivity extends AppCompatActivity {
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_perfil,
                 R.id.nav_inmueble,
+                R.id.nav_inquilino,
+                R.id.nav_contrato,
                 R.id.nav_salir
         )
                 .setOpenableLayout(binding.drawerLayout)
                 .build();
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        boolean abrirDrawer = getIntent().getBooleanExtra("abrirDrawer", false);
 
+        if (abrirDrawer) {
+            binding.drawerLayout.openDrawer(GravityCompat.START);
+
+            binding.navView.setCheckedItem(R.id.nav_perfil);
+        }
 
         //Drawer
         assert  binding.navView!=null;
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        //bottom Navigation
-        assert  binding.appBarMain.contentMain.bottomNavView!= null;
-        NavigationUI.setupWithNavController(binding.appBarMain.contentMain.bottomNavView, navController);
 
 
     }

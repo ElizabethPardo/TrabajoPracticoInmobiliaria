@@ -17,12 +17,6 @@ import com.example.trabajopracticoinmobiliaria.databinding.FragmentPerfilBinding
 import com.example.trabajopracticoinmobiliaria.modelo.Propietario;
 
 
-/**
- * Fragment that demonstrates a responsive layout pattern where the format of the content
- * transforms depending on the size of the screen. Specifically this Fragment shows items in
- * the [RecyclerView] using LinearLayoutManager in a small screen
- * and shows items using GridLayoutManager in a large screen.
- */
 public class PerfilFragment extends Fragment {
 
     private PerfilViewModel vm;

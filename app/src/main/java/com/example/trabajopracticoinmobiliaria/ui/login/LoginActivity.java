@@ -40,7 +40,9 @@ public class LoginActivity extends AppCompatActivity {
             if(exito != null && exito)
             {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("abrirDrawer", true);
                 startActivity(intent);
+                finish();
 
             }
         });
