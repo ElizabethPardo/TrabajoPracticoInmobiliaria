@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
 }
 
+
 android {
     namespace = "com.example.trabajopracticoinmobiliaria"
     compileSdk {
@@ -50,6 +51,10 @@ dependencies {
     implementation(libs.legacy.support.v4)
     implementation(libs.retrofit2.retrofit)
     implementation(libs.retrofit2.converter.gson)
+    implementation(libs.play.services.maps)
+    implementation(libs.converter.scalars)
+    implementation(libs.glide)
+    implementation(libs.retrofit2.converter.scalars)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

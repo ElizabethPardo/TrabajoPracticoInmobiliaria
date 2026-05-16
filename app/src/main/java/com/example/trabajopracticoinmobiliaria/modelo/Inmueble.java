@@ -6,44 +6,44 @@ public class Inmueble implements Serializable {
 
     private  int id;
     private String direccion;
-    private int ambientes;
     private String uso;
     private  String tipo;
-    private double precio;
-    private boolean estado;
+    private int ambientes;
+    private int superficie;
+    private double valor;
     private String imagen;
+    private boolean disponible;
     private  int propietarioId;
     private Propietario duenio;
-
     public Inmueble() {
     }
 
-    public Inmueble(String direccion, int ambientes, String tipo, String uso, double precio, boolean estado, String imagen) {
+    public Inmueble(String direccion, int ambientes, String tipo, String uso, double precio, boolean disponible, String imagen) {
         this.direccion = direccion;
         this.ambientes = ambientes;
         this.tipo = tipo;
         this.uso = uso;
-        this.precio = precio;
-        this.estado=estado;
+        this.valor = precio;
+        this.disponible=disponible;
         this.imagen=imagen;
     }
-    public Inmueble(int id,String direccion, int ambientes, String tipo, String uso, double precio, boolean estado, String imagen) {
+    public Inmueble(int id,String direccion, int ambientes, String tipo, String uso, double valor, boolean disponible, String imagen) {
         this.direccion = direccion;
         this.ambientes = ambientes;
         this.tipo = tipo;
         this.uso = uso;
-        this.precio = precio;
-        this.estado=estado;
+        this.valor = valor;
+        this.disponible=disponible;
         this.imagen=imagen;
         this.id=id;
     }
-    public Inmueble(String direccion, int ambientes, String tipo, String uso, double precio, boolean estado) {
+    public Inmueble(String direccion, int ambientes, String tipo, String uso, double valor, boolean disponible) {
         this.direccion = direccion;
         this.ambientes = ambientes;
         this.tipo = tipo;
         this.uso = uso;
-        this.precio = precio;
-        this.estado=estado;
+        this.valor = valor;
+        this.disponible=disponible;
     }
 
     public int getId() {
@@ -86,20 +86,20 @@ public class Inmueble implements Serializable {
         this.tipo = tipo;
     }
 
-    public double getPrecio() {
-        return precio;
+    public double getValor() {
+        return valor;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
-    public boolean getEstado() {
-        return estado;
+    public boolean getDisponible() {
+        return disponible;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
 
     public String getImagen() {
@@ -125,4 +125,13 @@ public class Inmueble implements Serializable {
     public void setDuenio(Propietario duenio) {
         this.duenio = duenio;
     }
+
+    public int getSuperficie() {
+        return superficie;
+    }
+
+    public void setSuperficie(int superficie) {
+        this.superficie = superficie;
+    }
+
 }

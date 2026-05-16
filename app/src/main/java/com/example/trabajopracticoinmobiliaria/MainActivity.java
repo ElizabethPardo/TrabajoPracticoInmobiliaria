@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = binding.navView;
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_inicio,
                 R.id.nav_perfil,
                 R.id.nav_inmueble,
                 R.id.nav_inquilino,

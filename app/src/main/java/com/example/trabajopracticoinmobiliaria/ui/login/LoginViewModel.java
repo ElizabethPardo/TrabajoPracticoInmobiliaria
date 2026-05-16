@@ -22,13 +22,19 @@ import retrofit2.Response;
 public class LoginViewModel extends AndroidViewModel {
 
     MutableLiveData<Boolean> usuarioM;
-    MutableLiveData<String> mensaje;
+    private MutableLiveData<String> mensaje = new MutableLiveData<>();
+    private MutableLiveData<Boolean> resetMutable = new MutableLiveData<>();;
+    private MutableLiveData<Boolean> estadoM;
+    private MutableLiveData<String> error;
+    private int activador = 0;
     private Context context;
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
         context= application.getApplicationContext();
-
+        usuarioM= new MutableLiveData<>();
+        error = new MutableLiveData<>();
+        estadoM = new MutableLiveData<>();
     }
     public LiveData<String> getMensaje()
     {
@@ -45,28 +51,53 @@ public class LoginViewModel extends AndroidViewModel {
         return usuarioM;
     }
 
-    public void recuperarDatos(String usuario, String clave)
+    public LiveData<String> getError() {
+        if(error == null)
+        {
+            error = new MutableLiveData<>();
+        }
+        return error;
+    }
+
+    public MutableLiveData<Boolean> getResetMutable() {
+
+        if(resetMutable == null)
+        {
+            resetMutable = new MutableLiveData<>();
+        }
+        return resetMutable;
+    }
+    public LiveData<Boolean> getEstadoM() {
+        if(estadoM == null){
+            estadoM = new MutableLiveData<>();
+        }
+        return estadoM;
+    }
+
+    public void recuperarDatos(String Usuario, String Clave)
     {
 
-        if(usuario.isEmpty() || clave.isEmpty())
+        if(Usuario.isEmpty() || Clave.isEmpty())
         {
             mensaje.setValue("Por favor, complete los campos");
         }
         else{
             ApiClient.MyApiInterface servicio= ApiClient.getServicio();
-            Call<String> call= servicio.loginForm(usuario,clave);
+            Call<String> call= servicio.loginForm(Usuario,Clave);
 
             call.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
                     Log.d("LOGIN", "CODIGO: " + response.code());
+                    try {
+                        Log.d("LOGIN_ERROR", response.errorBody().string());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     if (response.isSuccessful()) {
                         String token=response.body();
                         Log.d("LOGIN", "TOKEN OK");
                         ApiClient.crearToken(context,token);
-//                        Intent intent= new Intent(context, MainActivity.class);
-//                        intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
-//                        context.startActivity(intent);
                         usuarioM.setValue(true);
 
 
@@ -86,6 +117,50 @@ public class LoginViewModel extends AndroidViewModel {
         }
 
 
+    }
+
+    public void sensorG(float x){
+        if(x > 1 || x < -1){
+            activador++;
+        }
+        if(activador > 20){
+            activador = 0;
+            estadoM.setValue(true);
+        }
+    }
+
+    public void resetClave(String email){
+
+        ApiClient.MyApiInterface api = ApiClient.getServicio();
+
+        Call<String> call = api.resetearPassword(email);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.d("RESPUESTA", "codigo: " + response.code());
+
+                if(response.isSuccessful() && response.body() != null){
+                    Toast.makeText(context,
+                            response.body(),
+                            Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(context,
+                            "Error al enviar correo",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+                Toast.makeText(context,
+                        t.getMessage(),
+                        Toast.LENGTH_LONG).show();
+
+                Log.d("SALIDA", t.getMessage());
+            }
+        });
     }
 
 }
