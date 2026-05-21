@@ -2,8 +2,7 @@ package com.example.trabajopracticoinmobiliaria.ui.login;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
+
 import android.util.Log;
 import android.widget.Toast;
 
@@ -12,7 +11,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.trabajopracticoinmobiliaria.MainActivity;
 import com.example.trabajopracticoinmobiliaria.request.ApiClient;
 
 import retrofit2.Call;
@@ -88,15 +86,10 @@ public class LoginViewModel extends AndroidViewModel {
             call.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
-                    Log.d("LOGIN", "CODIGO: " + response.code());
-                    try {
-                        Log.d("LOGIN_ERROR", response.errorBody().string());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+
                     if (response.isSuccessful()) {
+
                         String token=response.body();
-                        Log.d("LOGIN", "TOKEN OK");
                         ApiClient.crearToken(context,token);
                         usuarioM.setValue(true);
 
@@ -138,27 +131,19 @@ public class LoginViewModel extends AndroidViewModel {
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.d("RESPUESTA", "codigo: " + response.code());
+
 
                 if(response.isSuccessful() && response.body() != null){
-                    Toast.makeText(context,
-                            response.body(),
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, response.body(), Toast.LENGTH_LONG).show();
                 }else{
-                    Toast.makeText(context,
-                            "Error al enviar correo",
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error al enviar correo", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
 
-                Toast.makeText(context,
-                        t.getMessage(),
-                        Toast.LENGTH_LONG).show();
-
-                Log.d("SALIDA", t.getMessage());
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

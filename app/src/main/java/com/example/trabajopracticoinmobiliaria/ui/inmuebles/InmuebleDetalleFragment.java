@@ -23,6 +23,8 @@ public class InmuebleDetalleFragment extends Fragment {
     private InmuebleDetalleViewModel inmuebleDetalleViewModel;
     private FragmentInmuebleDetalleBinding binding;
 
+    private Inmueble inmuebleActual;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,33 +34,19 @@ public class InmuebleDetalleFragment extends Fragment {
 
         View root = binding.getRoot();
 
-        final TextView tvCodigo = binding.tvCodigoInmueble;
-        final TextView tvAmbientes = binding.tvAmbientesInmueble;
-        final TextView tvDireccion = binding.tvDireccionInmueble;
-        final TextView tvPrecio = binding.tvPrecioInmueble;
-        final TextView tvUso = binding.tvUsoInmueble;
-        final TextView tvTipo = binding.tvTipo;
-        final CheckBox cbEstado = binding.cbEstadoInmueble;
-        final ImageView imageInmueble = binding.ivFotoInmueble;
-
-        Bundle bundle = getArguments();
-
-        if(bundle != null){
-            Inmueble inmueble = (Inmueble) bundle.getSerializable("inmueble");
-            inmuebleDetalleViewModel.setInmueble(inmueble);
-        }
 
         inmuebleDetalleViewModel.getInmuebleM().observe(getViewLifecycleOwner(), new Observer<Inmueble>() {
             @Override
             public void onChanged(Inmueble inmueble) {
 
-                tvCodigo.setText(inmueble.getId() + "");
-                tvAmbientes.setText(inmueble.getAmbientes() + "");
-                tvDireccion.setText(inmueble.getDireccion());
-                tvPrecio.setText(String.valueOf(inmueble.getValor()));
-                tvUso.setText(inmueble.getUso());
-                tvTipo.setText(inmueble.getTipo());
-                cbEstado.setChecked(inmueble.getDisponible());
+                binding.tvCodigoInmueble.setText(inmueble.getId() + "");
+                binding.tvAmbientesInmueble.setText(inmueble.getAmbientes() + "");
+                binding.tvDireccionInmueble.setText(inmueble.getDireccion());
+                binding.tvPrecioInmueble.setText(String.valueOf(inmueble.getValor()));
+                binding.tvUsoInmueble.setText(inmueble.getUso());
+                binding.tvTipo.setText(inmueble.getTipo());
+                binding.cbEstadoInmueble.setChecked(inmueble.getDisponible());
+                inmuebleActual = inmueble;
 
                 String urlImagen = "https://capacitacion.alwaysdata.net/" +
                         inmueble.getImagen().replace("\\", "/");
@@ -66,14 +54,25 @@ public class InmuebleDetalleFragment extends Fragment {
                 Glide.with(getContext())
                         .load(urlImagen)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(imageInmueble);
+                        .into(binding.ivFotoInmueble);
+            }
+        });
 
-                cbEstado.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        inmuebleDetalleViewModel.editarInmueble(inmueble);
-                    }
-                });
+        inmuebleDetalleViewModel.getMensajeDis().observe(getViewLifecycleOwner(), texto -> {
+            binding.cbEstadoInmueble.setText(texto);
+        });
+
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            Inmueble inmueble = (Inmueble) bundle.getSerializable("inmueble");
+            inmuebleDetalleViewModel.cargarInmueble(inmueble);
+        }
+
+        binding.cbEstadoInmueble.setOnClickListener(v -> {
+
+            if(inmuebleActual != null){
+
+                inmuebleDetalleViewModel.editarInmueble(binding.cbEstadoInmueble.isChecked());
             }
         });
 

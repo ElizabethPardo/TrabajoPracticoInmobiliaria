@@ -3,6 +3,7 @@ package com.example.trabajopracticoinmobiliaria.ui.inmuebles;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,58 +20,95 @@ import retrofit2.Response;
 
 public class InmuebleDetalleViewModel extends AndroidViewModel {
 
-    private MutableLiveData<Inmueble> inmuebleM= new MutableLiveData<>();;
+    private MutableLiveData<Inmueble> inmuebleM = new MutableLiveData<>();
+    ;
     private Context context;
-    private Inmueble i;
-    private MutableLiveData<String> error;
+    private MutableLiveData<String> error = new MutableLiveData<>();
+    private MutableLiveData<String> mensajeDis;
 
     public InmuebleDetalleViewModel(@NonNull Application application) {
         super(application);
-        context=application.getApplicationContext();
+        context = application.getApplicationContext();
     }
 
     public LiveData<Inmueble> getInmuebleM() {
-        if(inmuebleM == null){
+        if (inmuebleM == null) {
             inmuebleM = new MutableLiveData<>();
         }
         return inmuebleM;
     }
 
-    public void setInmueble(Inmueble inmueble){
+    public void setInmueble(Inmueble inmueble) {
         inmuebleM.setValue(inmueble);
     }
+
     public LiveData<String> getError() {
-        if(error == null)
-        {
+        if (error == null) {
             error = new MutableLiveData<>();
         }
         return error;
     }
 
-    public void editarInmueble(Inmueble inmu){
+    public LiveData<String> getMensajeDis() {
+        if (mensajeDis == null) {
+            mensajeDis = new MutableLiveData<>();
+        }
+        return mensajeDis;
+    }
 
-        String token= ApiClient.leerToken(context);
-        ApiClient.MyApiInterface servicio= ApiClient.getServicio();
+    private void actualizarEstado(boolean estado) {
+        if (estado) {
+            mensajeDis.postValue("Disponible para alquilar");
+        } else {
+            mensajeDis.postValue("No disponible para alquilar");
+        }
+    }
 
-        Call<Inmueble> inmueble= servicio.actualizarInmueble("Bearer " + token,inmu);
-        inmueble.enqueue(new Callback<Inmueble>() {
-            @Override
-            public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
+    public void cargarInmueble(Inmueble inmueble) {
+        this.inmuebleM.setValue(inmueble);
+        actualizarEstado(inmueble.getDisponible());
+    }
 
-                if(response.isSuccessful()){
-                    inmuebleM.setValue(response.body());
-                    Toast.makeText(context,"Se ha actualizado el estado del Inmueble!", Toast.LENGTH_LONG).show();
+    public void editarInmueble(Boolean disponible) {
+
+        Inmueble inmu = inmuebleM.getValue();
+        if (inmu != null) {
+            inmu.setDisponible(disponible);
+
+            String token = ApiClient.leerToken(context);
+            ApiClient.MyApiInterface servicio = ApiClient.getServicio();
+
+            Call<Inmueble> inmueble = servicio.actualizarInmueble(token, inmu);
+
+            inmueble.enqueue(new Callback<Inmueble>() {
+                @Override
+                public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
+
+                    if (response.isSuccessful() && response.body() != null) {
+                        Inmueble inmuebleRepo = response.body();
+                        inmuebleM.setValue(response.body());
+                        actualizarEstado(inmuebleRepo.getDisponible());
+                        Toast.makeText(context, "Estado del inmueble actualizado correctamente", Toast.LENGTH_SHORT).show();
+
+                    } else {
+
+                        try {
+                            error.setValue(response.errorBody().string());
+                            Toast.makeText(context, "Error al actualizar", Toast.LENGTH_LONG).show();
+
+                        } catch (Exception e) {
+
+                            error.setValue(e.getMessage());
+                        }
+                    }
                 }
-                else {
-                    error.setValue("No existen inmuebles");
+
+                @Override
+                public void onFailure(Call<Inmueble> call, Throwable t) {
+
+                    Toast.makeText(context, "Ha ocurrido un error", Toast.LENGTH_LONG).show();
                 }
-            }
-
-            @Override
-            public void onFailure(Call<Inmueble> call, Throwable t) {
-
-                Toast.makeText(context,"Ha ocurrido un error",Toast.LENGTH_LONG).show();
-            }
-        });
+            });
+        }
     }
 }

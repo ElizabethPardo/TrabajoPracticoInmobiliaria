@@ -22,68 +22,82 @@ import com.example.trabajopracticoinmobiliaria.modelo.Propietario;
 
 public class PerfilFragment extends Fragment {
 
-    private PerfilViewModel vm;
-    private FragmentPerfilBinding binding;
-    private Propietario propietarioActual=null;
+        private PerfilViewModel vm;
+        private FragmentPerfilBinding binding;
+        private Propietario propietarioActual = null;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+        public View onCreateView(@NonNull LayoutInflater inflater,
+                                 ViewGroup container,
+                                 Bundle savedInstanceState) {
 
-        binding = FragmentPerfilBinding.inflate(inflater, container, false);
-        vm= new ViewModelProvider(this).get(PerfilViewModel.class);
+            binding = FragmentPerfilBinding.inflate(inflater, container, false);
 
-        View root = binding.getRoot();
-        habilitarEdicion(false);
+            vm = new ViewModelProvider(this).get(PerfilViewModel.class);
 
-        vm.getPropietarioM().observe(getViewLifecycleOwner(), new Observer<Propietario>() {
-            @Override
-            public void onChanged(Propietario propietario) {
+            View root = binding.getRoot();
+
+            habilitarEdicion(false);
+
+            vm.getPropietarioM().observe(getViewLifecycleOwner(), propietario -> {
+
                 binding.etDni.setText(propietario.getDni());
+
                 binding.etNombre.setText(propietario.getNombre());
+
                 binding.etApellido.setText(propietario.getApellido());
+
                 binding.etEmail.setText(propietario.getEmail());
+
                 binding.etTelefono.setText(propietario.getTelefono());
 
-                propietarioActual=propietario;
-            }
-        });
+                propietarioActual = propietario;
+            });
 
-        vm.cargarPerfil();
+            vm.getErrorNombre().observe(getViewLifecycleOwner(), error -> {
 
+                binding.etNombre.setError(error);
+            });
 
-        binding.btEditar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            vm.getErrorApellido().observe(getViewLifecycleOwner(), error -> {
+
+                binding.etApellido.setError(error);
+            });
+
+            vm.getErrorDni().observe(getViewLifecycleOwner(), error -> {
+
+                binding.etDni.setError(error);
+            });
+
+            vm.getErrorTelefono().observe(getViewLifecycleOwner(), error -> {
+
+                binding.etTelefono.setError(error);
+            });
+
+            vm.getError().observe(getViewLifecycleOwner(), s -> {
+
+                Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
+            });
+
+            vm.cargarPerfil();
+
+            binding.btEditar.setOnClickListener(v -> {
+
                 habilitarEdicion(true);
-            }
-        });
+            });
 
-        binding.btAceptar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            binding.btAceptar.setOnClickListener(v -> {
 
                 String nombre = binding.etNombre.getText().toString().trim();
+
                 String apellido = binding.etApellido.getText().toString().trim();
+
                 String telefono = binding.etTelefono.getText().toString().trim();
+
                 String dni = binding.etDni.getText().toString().trim();
 
-                if(nombre.isEmpty()){
-                    binding.etNombre.setError("Ingrese un nombre");
-                    return;
-                }
+                boolean valido = vm.validarCampos(nombre, apellido, dni, telefono);
 
-                if(apellido.isEmpty()){
-                    binding.etApellido.setError("Ingrese un apellido");
-                    return;
-                }
-
-                if(dni.isEmpty()){
-                    binding.etDni.setError("Ingrese un DNI");
-                    return;
-                }
-
-                if(telefono.isEmpty()){
-                    binding.etTelefono.setError("Ingrese un teléfono");
+                if(!valido){
                     return;
                 }
 
@@ -96,48 +110,42 @@ public class PerfilFragment extends Fragment {
                         propietarioActual.getEmail(),
                         propietarioActual.getClave()
                 );
-                vm.editarPerfil(prop);
-                habilitarEdicion(false);
-            }
-        });
 
-        binding.btCambiarPass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                vm.editarPerfil(prop);
+
+                habilitarEdicion(false);
+            });
+
+            binding.btCambiarPass.setOnClickListener(v -> {
 
                 Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main).navigate(R.id.cambioPassFragment);
-            }
-        });
-        vm.getError().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                Toast.makeText(getContext(),s, Toast.LENGTH_LONG).show();
-            }
-        });
+            });
 
-        return root;
-    }
+            return root;
+        }
 
-    private void habilitarEdicion(boolean estado){
+        private void habilitarEdicion(boolean estado){
 
-        binding.etNombre.setEnabled(estado);
-        binding.etApellido.setEnabled(estado);
-        binding.etDni.setEnabled(estado);
-        binding.etTelefono.setEnabled(estado);
+            binding.etNombre.setEnabled(estado);
 
-        binding.btEditar.setVisibility(
-                estado ? View.GONE : View.VISIBLE
-        );
+            binding.etApellido.setEnabled(estado);
 
-        binding.btAceptar.setVisibility(
-                estado ? View.VISIBLE : View.GONE
-        );
-    }
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
+            binding.etDni.setEnabled(estado);
+
+            binding.etTelefono.setEnabled(estado);
+
+            binding.btEditar.setVisibility(estado ? View.GONE : View.VISIBLE);
+
+            binding.btAceptar.setVisibility(estado ? View.VISIBLE : View.GONE);
+        }
+
+        @Override
+        public void onDestroyView() {
+
+            super.onDestroyView();
+
+            binding = null;
+        }
 
 
 

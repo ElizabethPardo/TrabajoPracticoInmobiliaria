@@ -17,8 +17,6 @@
         android:layout_height="wrap_content"
         android:padding="12dp">
 
-
-
         <ImageView
             android:id="@+id/ivInmueble"
             android:layout_width="0dp"

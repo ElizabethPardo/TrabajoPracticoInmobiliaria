@@ -27,18 +27,24 @@ public class PerfilViewModel extends AndroidViewModel {
 
     private MutableLiveData<Propietario> propietarioM;
     private MutableLiveData<String> error = new MutableLiveData<>();
+    private MutableLiveData<String> errorNombre;
+    private MutableLiveData<String> errorApellido;
+    private MutableLiveData<String> errorDni;
+    private MutableLiveData<String> errorTelefono;
     private Context context;
 
     public PerfilViewModel(@NonNull Application application) {
         super(application);
         context = application.getApplicationContext();
+        propietarioM= new MutableLiveData<>();
+        errorNombre = new MutableLiveData<>();
+        errorApellido = new MutableLiveData<>();
+        errorDni = new MutableLiveData<>();
+        errorTelefono = new MutableLiveData<>();
     }
 
 
     public LiveData<Propietario> getPropietarioM() {
-
-        if(propietarioM == null)
-            propietarioM= new MutableLiveData<>();
 
         return propietarioM;
     }
@@ -49,14 +55,28 @@ public class PerfilViewModel extends AndroidViewModel {
         }
         return error;
     }
+    public LiveData<String> getErrorNombre() {
+        return errorNombre;
+    }
+
+    public LiveData<String> getErrorApellido() {
+        return errorApellido;
+    }
+
+    public LiveData<String> getErrorDni() {
+        return errorDni;
+    }
+
+    public LiveData<String> getErrorTelefono() {
+        return errorTelefono;
+    }
 
 
     public void cargarPerfil()
     {
         String token= ApiClient.leerToken(context);
         ApiClient.MyApiInterface servicio= ApiClient.getServicio();
-        Call<Propietario> propietario =
-                servicio.miPerfil("Bearer " + token);
+        Call<Propietario> propietario = servicio.miPerfil(token);
         propietario.enqueue(new Callback<Propietario>() {
             @Override
             public void onResponse(Call<Propietario> call, Response<Propietario> response) {
@@ -64,6 +84,7 @@ public class PerfilViewModel extends AndroidViewModel {
                     propietarioM.postValue(response.body());
                 }
                 else{
+
                     error.setValue("Perfil no encontrado");
                 }
             }
@@ -83,7 +104,7 @@ public class PerfilViewModel extends AndroidViewModel {
     {
         String token= ApiClient.leerToken(context);
         ApiClient.MyApiInterface servicio= ApiClient.getServicio();
-        Call<Propietario> propietarios= servicio.actualizarPerfil("Bearer " +token,prop);
+        Call<Propietario> propietarios= servicio.actualizarPerfil(token,prop);
 
         propietarios.enqueue(new Callback<Propietario>() {
             @Override
@@ -115,7 +136,7 @@ public class PerfilViewModel extends AndroidViewModel {
     {
         String token= ApiClient.leerToken(context);
         ApiClient.MyApiInterface servicio= ApiClient.getServicio();
-        Call <Void> call=  servicio.cambiarPassword("Bearer " + token,claveActual,claveNueva);
+        Call <Void> call=  servicio.cambiarPassword(token,claveActual,claveNueva);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -143,5 +164,41 @@ public class PerfilViewModel extends AndroidViewModel {
                 Toast.makeText(context,"Ha ocurrido un error"+ t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public boolean validarCampos(String nombre, String apellido, String dni, String telefono){
+
+        errorNombre.setValue(null);
+        errorApellido.setValue(null);
+        errorDni.setValue(null);
+        errorTelefono.setValue(null);
+
+        boolean valido = true;
+
+        if(nombre.isEmpty()){
+
+            errorNombre.setValue("Ingrese un nombre");
+            valido = false;
+        }
+
+        if(apellido.isEmpty()){
+
+            errorApellido.setValue("Ingrese un apellido");
+            valido = false;
+        }
+
+        if(dni.isEmpty()){
+
+            errorDni.setValue("Ingrese un DNI");
+            valido = false;
+        }
+
+        if(telefono.isEmpty()){
+
+            errorTelefono.setValue("Ingrese un teléfono");
+            valido = false;
+        }
+
+        return valido;
     }
 }

@@ -91,9 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email = b.etUser.getText().toString().trim();
 
                 if(email.isEmpty()){
-                    Toast.makeText(LoginActivity.this,
-                            "Ingrese un email",
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Ingrese un email", Toast.LENGTH_LONG).show();
                     return;
                 }
                 vm.resetClave(email);

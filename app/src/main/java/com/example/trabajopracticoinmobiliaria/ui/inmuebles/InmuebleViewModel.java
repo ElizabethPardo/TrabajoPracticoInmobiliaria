@@ -2,6 +2,7 @@ package com.example.trabajopracticoinmobiliaria.ui.inmuebles;
 
 import android.app.Application;
 import android.content.Context;
+import android.net.Uri;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,8 +24,8 @@ import retrofit2.Response;
 
 public class InmuebleViewModel  extends AndroidViewModel {
 
-    private MutableLiveData<String> error;
     private MutableLiveData<List<Inmueble>> inmueblesMutable;
+    private MutableLiveData<String> error;
     private Context context;
 
 
@@ -53,11 +54,10 @@ public class InmuebleViewModel  extends AndroidViewModel {
 
         String token = ApiClient.leerToken(context);
         ApiClient.MyApiInterface api = ApiClient.getServicio();
-        Call<List<Inmueble>> call = api.obtenerInmuebles("Bearer " + token);
+        Call<List<Inmueble>> call = api.obtenerInmuebles(token);
         call.enqueue(new Callback<List<Inmueble>>() {
             @Override
-            public void onResponse(Call<List<Inmueble>> call,
-                                   Response<List<Inmueble>> response) {
+            public void onResponse(Call<List<Inmueble>> call, Response<List<Inmueble>> response) {
 
                 if(response.isSuccessful() && response.body() != null){
 
@@ -76,4 +76,5 @@ public class InmuebleViewModel  extends AndroidViewModel {
             }
         });
     }
+
 }

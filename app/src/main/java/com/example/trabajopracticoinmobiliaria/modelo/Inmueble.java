@@ -1,9 +1,12 @@
 package com.example.trabajopracticoinmobiliaria.modelo;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Inmueble implements Serializable {
 
+    @SerializedName("idInmueble")
     private  int id;
     private String direccion;
     private String uso;
@@ -14,6 +17,8 @@ public class Inmueble implements Serializable {
     private String imagen;
     private boolean disponible;
     private  int propietarioId;
+    private double longitud;
+    private  double latitud;
     private Propietario duenio;
     public Inmueble() {
     }
@@ -27,23 +32,23 @@ public class Inmueble implements Serializable {
         this.disponible=disponible;
         this.imagen=imagen;
     }
-    public Inmueble(int id,String direccion, int ambientes, String tipo, String uso, double valor, boolean disponible, String imagen) {
+    public Inmueble(int id,String direccion, int ambientes, String uso, String tipo, double valor, boolean disponible, String imagen) {
         this.direccion = direccion;
         this.ambientes = ambientes;
-        this.tipo = tipo;
         this.uso = uso;
+        this.tipo = tipo;
         this.valor = valor;
         this.disponible=disponible;
         this.imagen=imagen;
         this.id=id;
     }
-    public Inmueble(String direccion, int ambientes, String tipo, String uso, double valor, boolean disponible) {
+    public Inmueble(String direccion, String tipo, String uso, int ambientes,int superficie, double valor) {
         this.direccion = direccion;
-        this.ambientes = ambientes;
         this.tipo = tipo;
         this.uso = uso;
+        this.ambientes = ambientes;
+        this.superficie=superficie;
         this.valor = valor;
-        this.disponible=disponible;
     }
 
     public int getId() {
@@ -134,4 +139,19 @@ public class Inmueble implements Serializable {
         this.superficie = superficie;
     }
 
+    public double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
+    }
+
+    public double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
+    }
 }

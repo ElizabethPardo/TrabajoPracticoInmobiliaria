@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.trabajopracticoinmobiliaria.modelo.Contrato;
 import com.example.trabajopracticoinmobiliaria.modelo.Inmueble;
+import com.example.trabajopracticoinmobiliaria.modelo.Pago;
 import com.example.trabajopracticoinmobiliaria.modelo.Propietario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,6 +28,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public class ApiClient {
 
@@ -56,7 +59,6 @@ public class ApiClient {
 
         @FormUrlEncoded
         @POST("api/Propietarios/email") Call<String> resetearPassword(@Field("email") String email);
-
         @FormUrlEncoded
         @PUT("api/Propietarios/changePassword")
         Call<Void> cambiarPassword(@Header("Authorization") String token, @Field("currentPassword") String claveActual, @Field("newPassword") String claveNueva);
@@ -65,21 +67,25 @@ public class ApiClient {
         @GET("api/Inmuebles/GetContratoVigente") Call<List<Inmueble>> obtenerInmueblesAlquilados(@Header("Authorization") String token);
         @PUT("api/Inmuebles/actualizar")
         Call<Inmueble> actualizarInmueble(@Header("Authorization") String token, @Body Inmueble inmueble);
-
         @Multipart
         @POST("api/Inmuebles/cargar")
         Call<Inmueble> cargarInmuebles(@Header("Authorization") String token, @Part MultipartBody.Part imagen, @Part("inmueble") RequestBody inmueble);
+        @GET("api/contratos/inmueble/{id}")
+        Call<Contrato> obtenerContratoPorInmueble(@Header("Authorization") String token, @Path("id") int idInmueble);
+        @GET("api/pagos/contrato/{id}")
+        Call<List<Pago>> obtenerPagosPorContrato(@Header("Authorization") String token, @Path("id") int idContrato);
+
     }
 
     public static void crearToken(Context context, String Token)
     {
-        SharedPreferences sp = context.getSharedPreferences("token.dat", context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences("token.xml", context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString("Token", Token);
-        editor.commit();
+        editor.putString("Token","Bearer " + Token);
+        editor.apply();
     }
     public static String leerToken(Context context) {
-        SharedPreferences sp = context.getSharedPreferences("token.dat", Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences("token.xml", Context.MODE_PRIVATE);
         return sp.getString("Token", null);
     }
 }
