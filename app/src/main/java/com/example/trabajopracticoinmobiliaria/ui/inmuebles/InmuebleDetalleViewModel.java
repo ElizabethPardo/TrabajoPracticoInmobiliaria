@@ -58,9 +58,9 @@ public class InmuebleDetalleViewModel extends AndroidViewModel {
 
     private void actualizarEstado(boolean estado) {
         if (estado) {
-            mensajeDis.postValue("Disponible para alquilar");
+            mensajeDis.postValue("Disponible");
         } else {
-            mensajeDis.postValue("No disponible para alquilar");
+            mensajeDis.postValue("No disponible");
         }
     }
 

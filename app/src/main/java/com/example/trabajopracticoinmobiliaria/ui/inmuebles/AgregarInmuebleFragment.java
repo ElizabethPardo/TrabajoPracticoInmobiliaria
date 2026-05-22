@@ -28,7 +28,7 @@ public class AgregarInmuebleFragment extends Fragment {
     private FragmentAgregarInmuebleBinding binding;
     private ActivityResultLauncher<PickVisualMediaRequest> arl;
     private Uri uriFoto;
-    //Intent intent;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,11 +44,32 @@ public class AgregarInmuebleFragment extends Fragment {
         binding = FragmentAgregarInmuebleBinding.inflate(inflater, container,false);
         View root = binding.getRoot();
 
-        //abrirGaleria();
+        vm.getErrorDireccion().observe(getViewLifecycleOwner(), error -> {
+            binding.etDireInmueble.setError(error);
+        });
+
+        vm.getErrorAmbientes().observe(getViewLifecycleOwner(), error -> {
+            binding.etAmbiestesInmueble.setError(error);
+        });
+
+        vm.getErrorSuperficie().observe(getViewLifecycleOwner(), error -> {
+            binding.etSuperficieInmueble.setError(error);
+        });
+
+        vm.getErrorPrecio().observe(getViewLifecycleOwner(), error -> {
+            binding.etPrecioInmueble.setError(error);
+        });
+
+        vm.getErrorImagen().observe(getViewLifecycleOwner(), error -> {
+            if(error != null){
+                Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         vm.getUriMutable().observe(getViewLifecycleOwner(), new Observer<Uri>() {
             @Override
             public void onChanged(Uri uri) {
+                binding.ivInmuebleNuevo.setVisibility(View.VISIBLE);
                 binding.ivInmuebleNuevo.setImageURI(uri);
                 uriFoto=uri;
             }
@@ -66,14 +87,15 @@ public class AgregarInmuebleFragment extends Fragment {
 
             String direccion = binding.etDireInmueble.getText().toString().trim();
             String ambientes = binding.etAmbiestesInmueble.getText().toString().trim();
+            String superficie= binding.etSuperficieInmueble.getText().toString().trim();
             String precio = binding.etPrecioInmueble.getText().toString().trim();
             String uso=binding.spUso.getSelectedItem().toString();
             String tipo= binding.spTipo.getSelectedItem().toString();
 
-            boolean valido = vm.validarCampos(direccion, ambientes, precio, uriFoto);
+            boolean valido = vm.validarCampos(direccion, ambientes,superficie, precio, uriFoto);
 
            if(valido){
-                vm.nuevoInmueble(direccion,uso,tipo,ambientes,"8",precio);
+                vm.nuevoInmueble(direccion,uso,tipo,ambientes,superficie,precio);
             }
         });
         return root;
@@ -84,15 +106,5 @@ public class AgregarInmuebleFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-//    private void abrirGaleria()
-//    {
-//        intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//        arl= registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-//            @Override
-//            public void onActivityResult(ActivityResult result) {
-//                vm.recibirFoto(result);
-//            }
-//        });
-//
-//    }
+
 }

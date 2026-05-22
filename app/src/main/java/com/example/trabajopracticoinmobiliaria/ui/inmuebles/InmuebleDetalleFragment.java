@@ -40,8 +40,9 @@ public class InmuebleDetalleFragment extends Fragment {
             public void onChanged(Inmueble inmueble) {
 
                 binding.tvCodigoInmueble.setText(inmueble.getId() + "");
-                binding.tvAmbientesInmueble.setText(inmueble.getAmbientes() + "");
                 binding.tvDireccionInmueble.setText(inmueble.getDireccion());
+                binding.tvAmbientesInmueble.setText(inmueble.getAmbientes() + "");
+                binding.tvSuperficieInmueble.setText(inmueble.getSuperficie() + "");
                 binding.tvPrecioInmueble.setText(String.valueOf(inmueble.getValor()));
                 binding.tvUsoInmueble.setText(inmueble.getUso());
                 binding.tvTipo.setText(inmueble.getTipo());

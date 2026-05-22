@@ -34,6 +34,7 @@ import retrofit2.Response;
 public class AgregarInmuebleViewModel extends AndroidViewModel {
     private MutableLiveData<String> errorDireccion;
     private MutableLiveData<String> errorAmbientes;
+    private MutableLiveData<String> errorSuperficie;
     private MutableLiveData<String> errorPrecio;
     private MutableLiveData<String> errorImagen;
     private Context context;
@@ -44,6 +45,7 @@ public class AgregarInmuebleViewModel extends AndroidViewModel {
         context=application.getApplicationContext();
         errorDireccion= new MutableLiveData<>();
         errorAmbientes= new MutableLiveData<>();
+        errorSuperficie= new MutableLiveData<>();
         errorPrecio= new MutableLiveData<>();
         errorImagen= new MutableLiveData<>();
         uriMutable = new MutableLiveData<>();
@@ -76,16 +78,10 @@ public class AgregarInmuebleViewModel extends AndroidViewModel {
         return errorImagen;
     }
 
+    public LiveData<String> getErrorSuperficie(){
+        return errorSuperficie;
+    }
 
-//    public void recibirFoto(ActivityResult result){
-//
-//        if(result.getResultCode() == RESULT_OK)
-//        {
-//            Intent data=result.getData();
-//            Uri uri=data.getData();
-//            uriMutable.setValue(uri);
-//        }
-//    }
 
     public void nuevoInmueble(String direccion, String uso, String tipo, String ambientes, String superficie, String valor)
     {
@@ -162,7 +158,7 @@ public class AgregarInmuebleViewModel extends AndroidViewModel {
     }
 
 
-    public boolean validarCampos(String direccion, String ambientesTexto, String precioTexto, Uri uriFoto)
+    public boolean validarCampos(String direccion, String ambientesTexto, String superficie,String precioTexto, Uri uriFoto)
     {
         errorDireccion.setValue(null);
         errorAmbientes.setValue(null);
@@ -180,7 +176,10 @@ public class AgregarInmuebleViewModel extends AndroidViewModel {
             errorAmbientes.setValue("Ingrese cantidad de ambientes");
             valido = false;
         }
-
+        if(superficie.isEmpty()){
+            errorSuperficie.setValue("Ingrese superficie");
+            valido = false;
+        }
         if(precioTexto.isEmpty()){
             errorPrecio.setValue("Ingrese un precio");
             valido = false;
@@ -208,6 +207,22 @@ public class AgregarInmuebleViewModel extends AndroidViewModel {
         }catch (NumberFormatException e){
 
             errorAmbientes.setValue("Número inválido");
+            return false;
+        }
+
+        try {
+
+            int sup = Integer.parseInt(superficie);
+
+            if(sup <= 0){
+
+                errorSuperficie.setValue("Debe ser mayor a 0");
+                return false;
+            }
+
+        }catch (NumberFormatException e){
+
+            errorSuperficie.setValue("Número inválido");
             return false;
         }
 

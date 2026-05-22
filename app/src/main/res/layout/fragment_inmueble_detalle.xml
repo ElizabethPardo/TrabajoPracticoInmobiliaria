@@ -100,6 +100,31 @@
             app:layout_constraintTop_toBottomOf="@id/tvAmbientesLabel" />
 
         <TextView
+            android:id="@+id/tvSuperficieLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Superficie"
+            android:textColor="#FFF5E7"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAmbientesInmueble" />
+
+        <EditText
+            android:id="@+id/tvSuperficieInmueble"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_rounded"
+            android:enabled="false"
+            android:padding="14dp"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSuperficieLabel" />
+
+        <TextView
             android:id="@+id/tvPrecioLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -108,7 +133,7 @@
             android:textColor="#FFF5E7"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvAmbientesInmueble" />
+            app:layout_constraintTop_toBottomOf="@id/tvSuperficieInmueble" />
 
         <EditText
             android:id="@+id/tvPrecioInmueble"
