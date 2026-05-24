@@ -1,14 +1,18 @@
 package com.example.trabajopracticoinmobiliaria.modelo;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Pago  implements Serializable {
+    @SerializedName("idPago")
     private int id;
     private int nroPago;
     private String fechaPago;
     private Double monto;
     private boolean estado;
     private  String detalle;
+
     private int idContrato;
     private Contrato contrato;
 

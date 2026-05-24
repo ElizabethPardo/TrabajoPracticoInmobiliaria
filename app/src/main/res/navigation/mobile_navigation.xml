@@ -65,7 +65,23 @@
         android:id="@+id/nav_inquilino"
         android:name="com.example.trabajopracticoinmobiliaria.ui.inquilinos.InquilinoFragment"
         android:label="Inquilinos"
-        tools:layout="@layout/fragment_inquilino" />
+        tools:layout="@layout/fragment_inquilino">
+
+        <action
+            android:id="@+id/action_nav_inquilino_to_inquilinoDetalleFragment"
+            app:destination="@id/inquilinoDetalleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/inquilinoDetalleFragment"
+        android:name="com.example.trabajopracticoinmobiliaria.ui.inquilinos.InquilinoDetalleFragment"
+        android:label="Inquilino"
+        tools:layout="@layout/fragment_inquilino_detalle" >
+
+        <action
+            android:id="@+id/action_inquilinoDetalleFragment_to_nav_inquilino"
+            app:destination="@id/nav_inquilino" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_contrato"

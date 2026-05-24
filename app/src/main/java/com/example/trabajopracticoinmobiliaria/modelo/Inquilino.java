@@ -1,9 +1,12 @@
 package com.example.trabajopracticoinmobiliaria.modelo;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Inquilino implements Serializable {
 
+    @SerializedName("idInquilino")
     private int id;
     private String nombre;
     private String apellido;
@@ -77,4 +80,6 @@ public class Inquilino implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
 }

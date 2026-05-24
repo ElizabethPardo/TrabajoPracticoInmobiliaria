@@ -52,7 +52,7 @@ public class ContratoViewModel extends AndroidViewModel {
 
     public void cargarContratosVig(){
 
-        String token = "Bearer " + ApiClient.leerToken(context);
+        String token = ApiClient.leerToken(context);
 
         ApiClient.MyApiInterface servicio = ApiClient.getServicio();
 

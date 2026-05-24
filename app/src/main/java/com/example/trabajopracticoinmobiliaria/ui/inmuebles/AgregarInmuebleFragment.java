@@ -1,12 +1,15 @@
 package com.example.trabajopracticoinmobiliaria.ui.inmuebles;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -44,6 +47,31 @@ public class AgregarInmuebleFragment extends Fragment {
         binding = FragmentAgregarInmuebleBinding.inflate(inflater, container,false);
         View root = binding.getRoot();
 
+        binding.spTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.parseColor("#FFF5E7"));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        binding.spUso.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.parseColor("#FFF5E7"));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         vm.getErrorDireccion().observe(getViewLifecycleOwner(), error -> {
             binding.etDireInmueble.setError(error);
         });

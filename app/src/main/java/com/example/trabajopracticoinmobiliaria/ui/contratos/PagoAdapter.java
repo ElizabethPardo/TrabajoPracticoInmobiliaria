@@ -40,13 +40,13 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull PagoAdapter.ViewHolder holder, int position) {
 
         holder.tvCodigoP.setText(String.valueOf(lista.get(position).getId()));
-        holder.tvNroPago.setText(String.valueOf(lista.get(position).getNroPago()));
+        holder.tvDetallePago.setText(lista.get(position).getDetalle());
         holder.tvCodigoCP.setText(String.valueOf(lista.get(position).getIdContrato()));
         holder.tvImportP.setText(String.valueOf(lista.get(position).getMonto()));
 
-        LocalDateTime fc = LocalDateTime.parse(lista.get(position).getFechaPago());
-        LocalDate hhh = fc.toLocalDate();
-        holder.tvfechaP.setText(hhh.toString());
+        LocalDate fecha = LocalDate.parse(lista.get(position).getFechaPago());
+        holder.tvfechaP.setText(fecha.toString());
+
 
         holder.tvImportP.setText("$ "+ lista.get(position).getMonto());
 
@@ -57,11 +57,11 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.ViewHolder> {
         return lista.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvCodigoP, tvNroPago, tvCodigoCP, tvImportP, tvfechaP;
+        private TextView tvCodigoP, tvCodigoCP, tvImportP, tvfechaP, tvDetallePago;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvCodigoP = itemView.findViewById(R.id.tvCodigoPago);
-            tvNroPago = itemView.findViewById(R.id.tvNroPago);
+            tvDetallePago = itemView.findViewById(R.id.tvDetallePago);
             tvCodigoCP = itemView.findViewById(R.id.tvCodigoCPago);
             tvImportP = itemView.findViewById(R.id.tvImportePago);
             tvfechaP = itemView.findViewById(R.id.tvFechaPago);

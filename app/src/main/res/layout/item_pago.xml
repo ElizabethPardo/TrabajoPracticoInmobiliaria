@@ -39,30 +39,6 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
-            android:id="@+id/textView32"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:text="Número de pago:"
-            android:textColor="#FFF5E7"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView29" />
-
-        <TextView
-            android:id="@+id/tvNroPago"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="TextView"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp"
-            app:layout_constraintStart_toEndOf="@id/textView32"
-            app:layout_constraintTop_toTopOf="@id/textView32"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <TextView
             android:id="@+id/textView34"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,7 +48,7 @@
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView32" />
+            app:layout_constraintTop_toBottomOf="@id/textView29" />
 
         <TextView
             android:id="@+id/tvCodigoCPago"
@@ -111,6 +87,30 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
+            android:id="@+id/textViewDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="Detalle:"
+            android:textColor="#FFF5E7"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView36" />
+
+        <TextView
+            android:id="@+id/tvDetallePago"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@id/textViewDetalle"
+            app:layout_constraintTop_toTopOf="@id/textViewDetalle"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
             android:id="@+id/textView37"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView36" />
+            app:layout_constraintTop_toBottomOf="@id/textViewDetalle" />
 
         <TextView
             android:id="@+id/tvFechaPago"

@@ -47,11 +47,11 @@ public class PagoViewModel extends AndroidViewModel {
     }
     public void cargarPagos(Bundle bundle){
 
-        Contrato contrato = (Contrato) bundle.getSerializable("contrato");
+        int idContrato = bundle.getInt("idContrato");
 
         String token = ApiClient.leerToken(context);
         ApiClient.MyApiInterface servicio = ApiClient.getServicio();
-        Call<List<Pago>> pagos= servicio.obtenerPagosPorContrato(token,contrato.getId());
+        Call<List<Pago>> pagos= servicio.obtenerPagosPorContrato(token,idContrato);
 
         pagos.enqueue(new Callback<List<Pago>>() {
             @Override

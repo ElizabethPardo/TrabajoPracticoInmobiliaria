@@ -1,15 +1,21 @@
 package com.example.trabajopracticoinmobiliaria.modelo;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Contrato implements Serializable {
+    @SerializedName("idContrato")
     private int id;
     private String fechaInicio;
     private String fechaFinalizacion;
     private double montoAlquiler;
     private boolean estado;
+    @SerializedName("idInquilino")
     private  int idInquilino;
     private Inquilino inquilino;
+
+    @SerializedName("idInmueble")
     private  int inmuebleId;
     private Inmueble inmueble;
 
@@ -77,10 +83,9 @@ public class Contrato implements Serializable {
         return inquilino;
     }
 
-    public void setIdInquilino(Inquilino inquilino) {
+    public void setInquilino(Inquilino inquilino) {
         this.inquilino = inquilino;
     }
-
     public int getInmuebleId() {
         return inmuebleId;
     }

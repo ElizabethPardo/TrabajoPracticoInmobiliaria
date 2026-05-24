@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="#2E2E2E">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,197 +11,160 @@
         android:layout_height="wrap_content"
         android:padding="15dp">
 
-        <TextView
-            android:id="@+id/tvDireccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Dirección"
-            android:textColor="#FFF5E7"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/etDireInmueble"
-            android:layout_width="0dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edittext_rounded"
-            android:padding="14dp"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/tvDireccion"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
 
         <TextView
-            android:id="@+id/tvAmbientes"
+            android:id="@+id/lblCodigo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Ambientes"
+            android:layout_marginTop="10dp"
+            android:text="Código"
             android:textColor="#FFF5E7"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/etDireInmueble"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
-            android:id="@+id/etAmbiestesInmueble"
+            android:id="@+id/tvCodigoInquilino"
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/edittext_rounded"
-            android:inputType="number"
+            android:enabled="false"
             android:padding="14dp"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/tvAmbientes"
+            app:layout_constraintTop_toBottomOf="@id/lblCodigo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
 
         <TextView
-            android:id="@+id/tvPrecio"
+            android:id="@+id/lblNombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Precio"
+            android:text="Nombre"
             android:textColor="#FFF5E7"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/etAmbiestesInmueble"
+            app:layout_constraintTop_toBottomOf="@id/tvCodigoInquilino"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
-            android:id="@+id/etPrecioInmueble"
+            android:id="@+id/tvNombreInquilino"
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/edittext_rounded"
-            android:inputType="numberDecimal"
+            android:enabled="false"
             android:padding="14dp"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/tvPrecio"
+            app:layout_constraintTop_toBottomOf="@id/lblNombre"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+
         <TextView
-            android:id="@+id/tvSuperficie"
+            android:id="@+id/lblApellido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Superficie"
+            android:text="Apellido"
             android:textColor="#FFF5E7"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/etPrecioInmueble"
+            app:layout_constraintTop_toBottomOf="@id/tvNombreInquilino"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
-            android:id="@+id/etSuperficieInmueble"
+            android:id="@+id/tvApellidoInquilino"
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/edittext_rounded"
-            android:inputType="number"
+            android:enabled="false"
             android:padding="14dp"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/tvSuperficie"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <TextView
-            android:id="@+id/tvTipo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Tipo"
-            android:textColor="#FFF5E7"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/etSuperficieInmueble"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Spinner
-            android:id="@+id/spTipo"
-            android:layout_width="0dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edittext_rounded"
-            android:entries="@array/tipos"
-            android:textColor="#FFF5E7"
-            app:layout_constraintTop_toBottomOf="@id/tvTipo"
+            app:layout_constraintTop_toBottomOf="@id/lblApellido"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
 
         <TextView
-            android:id="@+id/tvUso"
+            android:id="@+id/lblDni"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Uso"
+            android:text="DNI"
             android:textColor="#FFF5E7"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/spTipo"
+            app:layout_constraintTop_toBottomOf="@id/tvApellidoInquilino"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Spinner
-            android:id="@+id/spUso"
+        <EditText
+            android:id="@+id/tvDniInquilino"
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/edittext_rounded"
-            android:entries="@array/usos"
-            android:textColor="#FFF5E7"
-            app:layout_constraintTop_toBottomOf="@id/tvUso"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-
-        <ImageView
-            android:id="@+id/ivInmuebleNuevo"
-            android:layout_width="0dp"
-            android:layout_height="180dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/edittext_rounded"
-            android:scaleType="centerCrop"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/spUso"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <Button
-            android:id="@+id/btCargarFoto"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/button_rounded"
-            android:text="Abrir Galería"
-            android:textAllCaps="false"
-            android:textColor="#2E2E2E"
+            android:enabled="false"
+            android:padding="14dp"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/ivInmuebleNuevo"
+            app:layout_constraintTop_toBottomOf="@id/lblDni"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
 
-        <Button
-            android:id="@+id/btAgregar"
+        <TextView
+            android:id="@+id/lblMail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Mail"
+            android:textColor="#FFF5E7"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tvDniInquilino"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/tvMailInquilino"
             android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_rounded"
+            android:enabled="false"
+            android:padding="14dp"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/lblMail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <TextView
+            android:id="@+id/lblTelefono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Teléfono"
+            android:textColor="#FFF5E7"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tvMailInquilino"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/tvTelInquilino"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="30dp"
-            android:background="@drawable/button_rounded"
-            android:text="Guardar"
-            android:textAllCaps="false"
-            android:textColor="#2E2E2E"
+            android:background="@drawable/edittext_rounded"
+            android:enabled="false"
+            android:padding="14dp"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/btCargarFoto"
+            app:layout_constraintTop_toBottomOf="@id/lblTelefono"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />

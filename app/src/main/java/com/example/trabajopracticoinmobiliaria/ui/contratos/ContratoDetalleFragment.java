@@ -45,13 +45,13 @@ public class ContratoDetalleFragment extends Fragment {
 
                 tvCodigoContrato.setText(contrato.getId() + "");
 
-                LocalDateTime fi = LocalDateTime.parse(contrato.getFechaInicio());
-                LocalDate fff = fi.toLocalDate();
-                tvInicioContrato.setText(fff.toString());
+                LocalDate fi = LocalDate.parse(contrato.getFechaInicio());
+                //LocalDate fff = fi.toLocalDate();
+                tvInicioContrato.setText(fi.toString());
 
-                LocalDateTime fc = LocalDateTime.parse(contrato.getFechaFinalizacion());
-                LocalDate hhh = fc.toLocalDate();
-                tvFinCOntrato.setText(hhh.toString());
+                LocalDate fc = LocalDate.parse(contrato.getFechaFinalizacion());
+                //LocalDate hhh = fc.toLocalDate();
+                tvFinCOntrato.setText(fc.toString());
 
                 tvMontoContrato.setText("$ " + contrato.getInmueble().getValor());
                 tvInquilinoContrato.setText(contrato.getInquilino().getNombre()+" "+ contrato.getInquilino().getApellido());
@@ -60,15 +60,15 @@ public class ContratoDetalleFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         Bundle bundle = new Bundle();
-                        int id = getArguments().getInt("idInmueble");
-                        contratoDetalleViewModel.buscarContrato(id);
-                        //bundle.putSerializable("contrato", contrato);
+                        bundle.putInt("idContrato", contrato.getId());
                         Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main).navigate(R.id.pagoFragment,bundle);
                     }
                 });
             }
         });
         //contratoDetalleViewModel.cargarCon(getArguments());
+        int id = getArguments().getInt("idInmueble");
+        contratoDetalleViewModel.buscarContrato(id);
 
         return root;
     }
