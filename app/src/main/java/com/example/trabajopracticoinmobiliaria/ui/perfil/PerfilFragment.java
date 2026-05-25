@@ -108,7 +108,7 @@ public class PerfilFragment extends Fragment {
                         dni,
                         telefono,
                         propietarioActual.getEmail(),
-                        propietarioActual.getClave()
+                        null
                 );
 
                 vm.editarPerfil(prop);
