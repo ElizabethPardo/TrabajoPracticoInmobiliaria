@@ -10,8 +10,8 @@ import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Patterns;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -46,6 +46,10 @@ public class LoginActivity extends AppCompatActivity {
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         listaSensores = sensorManager.getSensorList(Sensor.TYPE_GYROSCOPE);
 
+        vm.getError().observe(this, mensaje -> {
+            Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show();
+        });
+
 
         vm.getEstadoM().observe(this, new Observer<Boolean>() {
             @Override
@@ -56,12 +60,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        vm.getError().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
-            }
-        });
 
         b.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import android.util.Log;
+import android.util.Patterns;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,7 +21,6 @@ import retrofit2.Response;
 public class LoginViewModel extends AndroidViewModel {
 
     MutableLiveData<Boolean> usuarioM;
-    private MutableLiveData<String> mensaje = new MutableLiveData<>();
     private MutableLiveData<Boolean> resetMutable = new MutableLiveData<>();;
     private MutableLiveData<Boolean> estadoM;
     private MutableLiveData<String> error;
@@ -34,13 +34,7 @@ public class LoginViewModel extends AndroidViewModel {
         error = new MutableLiveData<>();
         estadoM = new MutableLiveData<>();
     }
-    public LiveData<String> getMensaje()
-    {
-        if(mensaje == null)
-            mensaje= new MutableLiveData<>();
 
-        return mensaje;
-    }
     public LiveData<Boolean> getUsuarioM()
     {
         if(usuarioM == null)
@@ -72,14 +66,25 @@ public class LoginViewModel extends AndroidViewModel {
         return estadoM;
     }
 
+
     public void recuperarDatos(String Usuario, String Clave)
     {
-
-        if(Usuario.isEmpty() || Clave.isEmpty())
-        {
-            mensaje.setValue("Por favor, complete los campos");
+        if(Usuario.isEmpty()){
+            error.setValue("Debe ingresar un email");
+            return;
         }
-        else{
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(Usuario).matches()){
+            error.setValue("Debe ingresar un email válido");
+            return;
+        }
+
+        if(Clave.isEmpty()){
+            error.setValue("Debe ingresar una contraseña");
+            return;
+        }
+
+
             ApiClient.MyApiInterface servicio= ApiClient.getServicio();
             Call<String> call= servicio.loginForm(Usuario,Clave);
 
@@ -93,21 +98,16 @@ public class LoginViewModel extends AndroidViewModel {
                         ApiClient.crearToken(context,token);
                         usuarioM.setValue(true);
 
-
                     } else {
-                        Log.d("Error",response.message());
-                        mensaje.setValue("El usuario o contraseña son incorrectos");
+                        error.setValue("El usuario o contraseña son incorrectos");
                     }
-
-
                 }
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-                    Log.d("Mensaje",t.getMessage());
+                    error.setValue("Error de conexión");
                 }
             });
-        }
 
 
     }
