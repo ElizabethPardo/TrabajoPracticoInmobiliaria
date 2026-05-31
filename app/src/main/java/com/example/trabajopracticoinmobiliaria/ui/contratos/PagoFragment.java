@@ -34,6 +34,7 @@ public class PagoFragment extends Fragment {
         rvPago = binding.rvPago;
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1, LinearLayoutManager.VERTICAL, false);
         rvPago.setLayoutManager(gridLayoutManager);
+
         pagoViewModel.getPagosM().observe(getViewLifecycleOwner(), new Observer<List<Pago>>() {
             @Override
             public void onChanged(List<Pago> pagos) {

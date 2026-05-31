@@ -7,13 +7,11 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.trabajopracticoinmobiliaria.modelo.Contrato;
 import com.example.trabajopracticoinmobiliaria.modelo.Inmueble;
 import com.example.trabajopracticoinmobiliaria.request.ApiClient;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,7 +27,6 @@ public class ContratoViewModel extends AndroidViewModel {
     public ContratoViewModel(@NonNull Application application) {
         super(application);
         context = application.getApplicationContext();
-        inmueblesMutable = new MutableLiveData<>();
     }
 
     public LiveData<List<Inmueble>> getInmueblesMutable() {
@@ -50,7 +47,7 @@ public class ContratoViewModel extends AndroidViewModel {
         return error;
     }
 
-    public void cargarContratosVig(){
+    public void cargarInmueblesAlquilados(){
 
         String token = ApiClient.leerToken(context);
 

@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -20,7 +18,7 @@ import com.example.trabajopracticoinmobiliaria.modelo.Contrato;
 import org.jspecify.annotations.NonNull;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ContratoDetalleFragment extends Fragment {
 
@@ -32,31 +30,25 @@ public class ContratoDetalleFragment extends Fragment {
         contratoDetalleViewModel = new ViewModelProvider(this).get(ContratoDetalleViewModel.class);
         binding = FragmentContratoDetalleBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        final TextView tvCodigoContrato = binding.tvCodigoContrato;
-        final TextView tvInicioContrato = binding.tvInicioContrato;
-        final TextView tvFinCOntrato = binding.tvFinContrato;
-        final TextView tvMontoContrato = binding.tvMontoContrato;
-        final TextView tvInquilinoContrato = binding.tvInquilinoContrato;
-        final TextView tvInmuebleContrato = binding.tvInmuebleContrato;
-        final Button btPagos = binding.btPagos;
+
         contratoDetalleViewModel.getContratoM().observe(getViewLifecycleOwner(), new Observer<Contrato>() {
             @Override
             public void onChanged(Contrato contrato) {
 
-                tvCodigoContrato.setText(contrato.getId() + "");
+                binding.tvCodigoContrato.setText(contrato.getId() + "");
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
                 LocalDate fi = LocalDate.parse(contrato.getFechaInicio());
-                //LocalDate fff = fi.toLocalDate();
-                tvInicioContrato.setText(fi.toString());
+                binding.tvInicioContrato.setText(fi.format(formatter));
 
                 LocalDate fc = LocalDate.parse(contrato.getFechaFinalizacion());
-                //LocalDate hhh = fc.toLocalDate();
-                tvFinCOntrato.setText(fc.toString());
+                binding.tvFinContrato.setText(fc.format(formatter));
 
-                tvMontoContrato.setText("$ " + contrato.getInmueble().getValor());
-                tvInquilinoContrato.setText(contrato.getInquilino().getNombre()+" "+ contrato.getInquilino().getApellido());
-                tvInmuebleContrato.setText(contrato.getInmueble().getDireccion());
-                btPagos.setOnClickListener(new View.OnClickListener() {
+                binding.tvMontoContrato.setText("$ " + contrato.getInmueble().getValor());
+                binding.tvInquilinoContrato.setText(contrato.getInquilino().getNombre()+" "+ contrato.getInquilino().getApellido());
+                binding.tvInmuebleContrato.setText(contrato.getInmueble().getDireccion());
+                binding.btPagos.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Bundle bundle = new Bundle();
@@ -66,9 +58,13 @@ public class ContratoDetalleFragment extends Fragment {
                 });
             }
         });
-        //contratoDetalleViewModel.cargarCon(getArguments());
-        int id = getArguments().getInt("idInmueble");
-        contratoDetalleViewModel.buscarContrato(id);
+
+        Bundle args = getArguments();
+
+        if(args != null){
+            int id = args.getInt("idInmueble");
+            contratoDetalleViewModel.buscarContrato(id);
+        }
 
         return root;
     }

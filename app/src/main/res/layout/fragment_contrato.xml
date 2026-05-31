@@ -5,13 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2E2E2E"
     tools:context=".ui.contratos.ContratoFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvContratos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000000"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

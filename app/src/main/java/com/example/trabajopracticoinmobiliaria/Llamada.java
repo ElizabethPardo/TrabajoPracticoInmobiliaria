@@ -11,8 +11,8 @@ public class Llamada extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d("salida", "llamada");
-        Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:266"));
+
+        Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:2664553747"));
         context.startActivity(i);
         Toast.makeText(context, "Llamando Home Seller", Toast.LENGTH_LONG).show();
     }

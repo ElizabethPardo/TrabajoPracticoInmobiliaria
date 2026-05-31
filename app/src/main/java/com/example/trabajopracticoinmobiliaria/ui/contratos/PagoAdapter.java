@@ -15,6 +15,7 @@ import org.jspecify.annotations.NonNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.ViewHolder> {
@@ -42,11 +43,11 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.ViewHolder> {
         holder.tvCodigoP.setText(String.valueOf(lista.get(position).getId()));
         holder.tvDetallePago.setText(lista.get(position).getDetalle());
         holder.tvCodigoCP.setText(String.valueOf(lista.get(position).getIdContrato()));
-        holder.tvImportP.setText(String.valueOf(lista.get(position).getMonto()));
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         LocalDate fecha = LocalDate.parse(lista.get(position).getFechaPago());
-        holder.tvfechaP.setText(fecha.toString());
-
+        holder.tvfechaP.setText(fecha.format(formatter));
 
         holder.tvImportP.setText("$ "+ lista.get(position).getMonto());
 

@@ -2,7 +2,6 @@ package com.example.trabajopracticoinmobiliaria.ui.contratos;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.Bundle;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -31,11 +30,7 @@ public class ContratoDetalleViewModel  extends AndroidViewModel {
         }
         return contratoM;
     }
-//    public void cargarCon(Bundle b){
-//        Contrato con = (Contrato) b.getSerializable("contrato");
-//        contratoM.setValue(con);
-//
-//    }
+
     public void buscarContrato(int idInmueble){
 
         String token = ApiClient.leerToken(context);

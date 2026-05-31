@@ -141,7 +141,7 @@ public class PerfilViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()){
-                   // propietarioM.postValue(response.body());
+
                     Toast.makeText(context,"Contraseña actualizada!",Toast.LENGTH_LONG).show();
                     ApiClient.crearToken(context, "");
 
@@ -200,5 +200,30 @@ public class PerfilViewModel extends AndroidViewModel {
         }
 
         return valido;
+    }
+
+    public boolean validarPassword(String claveActual, String claveNueva) {
+
+        if(claveActual.isEmpty()){
+            error.setValue("Ingrese la contraseña actual");
+            return false;
+        }
+
+        if(claveNueva.isEmpty()){
+            error.setValue("Ingrese la nueva contraseña");
+            return false;
+        }
+
+        if(claveNueva.length() < 6){
+            error.setValue("La contraseña debe tener al menos 6 caracteres");
+            return false;
+        }
+
+        if(claveActual.equals(claveNueva)){
+            error.setValue("La nueva contraseña no puede ser igual a la actual");
+            return false;
+        }
+
+        return true;
     }
 }

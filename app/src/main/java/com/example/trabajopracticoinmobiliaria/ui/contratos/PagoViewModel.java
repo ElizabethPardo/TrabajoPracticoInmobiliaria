@@ -8,13 +8,11 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.trabajopracticoinmobiliaria.modelo.Contrato;
 import com.example.trabajopracticoinmobiliaria.modelo.Pago;
 import com.example.trabajopracticoinmobiliaria.request.ApiClient;
 
 import org.jspecify.annotations.NonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

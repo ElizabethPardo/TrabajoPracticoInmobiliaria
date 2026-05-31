@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.trabajopracticoinmobiliaria.R;
 import com.example.trabajopracticoinmobiliaria.databinding.FragmentContratoBinding;
@@ -38,6 +39,9 @@ public class ContratoFragment  extends Fragment {
         rvContrato = binding.rvContratos;
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
         rvContrato.setLayoutManager(gridLayoutManager);
+        contratoViewModel.getError().observe(getViewLifecycleOwner(), mensaje ->
+                Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show()
+        );
         contratoViewModel.getInmueblesMutable().observe(getViewLifecycleOwner(), new Observer<List<Inmueble>>() {
             @Override
             public void onChanged(List<Inmueble> inmuebles) {
@@ -45,7 +49,7 @@ public class ContratoFragment  extends Fragment {
                 rvContrato.setAdapter(contratoAdapter);
             }
         });
-        contratoViewModel.cargarContratosVig();
+        contratoViewModel.cargarInmueblesAlquilados();
         return root;
     }
 

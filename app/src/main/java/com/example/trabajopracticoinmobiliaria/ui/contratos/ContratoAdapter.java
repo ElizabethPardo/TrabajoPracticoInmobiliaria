@@ -49,13 +49,14 @@ public class ContratoAdapter extends RecyclerView.Adapter<ContratoAdapter.ViewHo
         Inmueble inmueble = lista.get(position);
 
         holder.tvDireccionC.setText(inmueble.getDireccion());
-        String imagen = lista.get(position)
-                .getImagen()
-                .replace("\\", "/");
-        Glide.with(context)
-                .load("https://capacitacion.alwaysdata.net/" + imagen)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.ivInmuebleC);
+        if(inmueble.getImagen() != null){
+            String imagen = inmueble.getImagen().replace("\\", "/");
+
+            Glide.with(context)
+                    .load("https://capacitacion.alwaysdata.net/" + imagen)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(holder.ivInmuebleC);
+        }
 
     }
 
